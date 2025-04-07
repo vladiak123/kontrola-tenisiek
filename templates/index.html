@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <title>Zoznam tenisiek</title>
+    <style>
+        body { font-family: Arial; background: #f9f9f9; padding: 20px; }
+        .sneaker { border: 1px solid #ccc; border-radius: 8px; padding: 10px; margin: 10px; background: #fff; max-width: 300px; }
+        .in-stock { color: green; font-weight: bold; }
+        .out-of-stock { color: red; font-weight: bold; }
+        img { width: 100%; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Zoznam tenisiek</h1>
+    <div style="display: flex; flex-wrap: wrap;">
+        {% for s in sneakers %}
+            <div class="sneaker">
+                <h2>{{ s.name }}</h2>
+                {% if s.image %}
+                    <img src="{{ s.image }}" alt="{{ s.name }}">
+                {% endif %}
+                <p>Veľkosť: {{ s.size or "Neznáma" }}</p>
+                <p class="{{ 'in-stock' if s.availability == 'Na sklade' else 'out-of-stock' }}">{{ s.availability }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
